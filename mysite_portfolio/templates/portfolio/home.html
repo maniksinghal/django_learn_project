@@ -1,0 +1,12 @@
+<h1> This is the portfolio home</h1>
+
+<a href="{% url 'blog:home_url' %}">Blogs home</a><br><br>
+<!-- Django's language -->
+{% for project in projects %}
+{{ project.title }}
+<br>{{ project.description}}
+<br><img src="{{ project.image.url }}">
+{% if project.url %}
+<br><a href="{{ project.url}}">Link</a>
+{% endif %}
+{% endfor %}

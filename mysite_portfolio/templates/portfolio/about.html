@@ -1,0 +1,27 @@
+<h1>This is an about page (the actual implementation is in /portfolio)</h1>
+
+We start by creating a model (database-schema) in models.py of the app<br>
+All the fields in the model are of type <i>models.DataType</i><br>
+When working with image fields, following additional is required:<br>
+- pip3 install pillow<br>
+- Create a MEDIA_ROOT path in settings.py (generally top level media folder in project)<br>
+- Create any MEDIA_URL (just like URL path in urls.py) in settings.py<br>
+- Tie MEDIA_ROOT with MEDIA_URL in urls.py<br>
+<br>
+Create migration for the new model: python3 manage.py makemigrations<br>
+- Check out project/app/migrations/__init__.py  (auto-generated)<br>
+Register migration with the admin: python3 manage.py migrate<br>
+
+<h3>Adding entries in the model using admin</h3>
+- Register the model with admin through admin.py: admin.site.register(Project)
+- Create superuser: python3 manage.py createsuperuser<br>
+- Open localhost:/admin (points to admin.sites.url)<br>
+&nbsp;&nbsp;- Add entries graphically into the database.
+
+<h3>Pulling entries into html</h3>
+- projs = Project.objects.all()<br>
+- for proj in projs:   proj.title, proj.description, ...<br>
+- Some custom code language support in Django to iterate, print etc.<br>
+- check mysite_portfolio/templates/portfolio/home.html for details<br>
+
+<a href="{% url 'port_url' %}">Now to actual portfolio SITE</a>

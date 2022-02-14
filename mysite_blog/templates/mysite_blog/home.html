@@ -1,0 +1,40 @@
+<!-- Apply the skeleton formatting defined in base_html.html
+     
+    -->
+{% extends 'mysite_blog/base_html.html' %}
+
+<!-- The content of this page gets inserted into the base-formatting
+     at the %content% placeholder -->
+{% block content %}
+<h1> This is the Blogs home</h1>
+
+<!-- Tell how many blogs are there
+     Say 'blogs' if more than 1, else say 'blog' 
+     Just showing off -->
+<heading1>Manik has {{ blogs.count }} blog{{blogs.count|pluralize}}</heading1>
+
+
+<!-- Add an image from a static location (STATIC_URL)-->
+{% load static %}
+<img src="{% static 'mysite_blog/fishes1.jpg' %}">
+
+<!-- Django's language -->
+{% for blog in blogs %}
+<!-- Give link to the detail.html for the app blog
+        - app name blog: defined in urls.py 
+        - blog.id is the primary key internally generated for the sqlite db-->
+<a href="{% url 'blog:detail_url' blog.id %}"><h2>{{ blog.title }}</h2></a>
+
+<!-- Can show the date as default format, but we customize below-->
+{{ blog.date|date:'M d Y'}}<br>
+
+<!--Don't show complete description in the blog list if its too long. 
+    Save it for the blog's dedicated page -->
+{{ blog.description|truncatechars:20}}
+
+<!-- Other operations that can be applied on the text:
+   a) |safe : Tells that its safe to apply html tags in the description
+   b) |striptags: Remove all html tags from description and show only in
+      raw form -->
+{% endfor %}
+{% endblock %}

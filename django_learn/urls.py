@@ -14,8 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from pwd_generator import views    #Manik
+from mysite_portfolio import portfolio_views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,7 +33,15 @@ urlpatterns = [
     path("my_password/", views.password, name='password_url'),
     
     path("styling/", views.styling, name='styling_url'),
+    path("portfolio/", portfolio_views.portfolio, name='port_url'),
+    path("portfolio_about/", portfolio_views.portfolio_about, name='port_about_url'),
 
     #Empty string points to the home URL
     path('', views.home, name='home_url'),
+
+    #Forward all requests to blog/... to mysite_blog app
+    #Requires a urls.py inside the app
+    path('blog/', include('mysite_blog.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

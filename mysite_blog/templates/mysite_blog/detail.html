@@ -1,0 +1,12 @@
+<!-- Apply the skeleton formatting defined in base_html.html-->
+{% extends 'mysite_blog/base_html.html' %}
+
+<!-- The content of this page gets inserted into the base-formatting
+    at the %content% placeholder -->
+{% block content %}
+
+<h2>{{ blog.title }}</h2>
+{{ blog.date}}<br>
+{{ blog.description}}
+
+{% endblock %}
