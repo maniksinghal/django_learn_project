@@ -1,0 +1,28 @@
+<h1>Password generator</h1>
+
+Below we have a form that will generate a 6 or 7 length password.<br/>
+The <i>action</i> field of the form refers to a <i>password_url</i> variable.
+<br/>
+The variable points to a 'my_password' path in utils.py, which maps to
+a <i>def password:</i> in views.py<br/>
+The interesting thing is that there is no actual 'my_password' path. <br/>
+It will show up in the address-bar of the browser but it is just
+a mapping of the requested page to the corresponding python function.
+<br/><br/>
+<form action="{% url 'password_url' %}">
+    <select name="length">
+        <option value="6">6 char long</option>
+        <option value="7">7 char long</option>
+        <option value="8">8 char long</option>
+        <option value="9" selected="selected">9 char long</option>
+        <option value="10">10 char long</option>
+    </select>
+    <br>
+    <input type="checkbox" name="uppercase"> Uppercase
+    <br>
+    <input type="checkbox" name="numbers"> Numbers
+    
+
+    <br/>
+    <input type="submit" value="Generate Password">
+</form>
